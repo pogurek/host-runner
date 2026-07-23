@@ -1,0 +1,81 @@
+{
+  "name": "host-runner",
+  "displayName": "Host Runner",
+  "description": "Launch a host-side application from a dev container window.",
+  "publisher": "pete",
+  "version": "0.0.1",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/node": "^26.1.1",
+    "@types/vscode": "^1.125.0",
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.0",
+    "prettier": "^3.5.2",
+    "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pogurek/host-runner.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "compile": "tsc -p tsconfig.json",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .ts"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "hostExplorer.open",
+        "title": "Host: Launch host application"
+      }
+    ],
+    "configuration": {
+      "title": "Host Explorer",
+      "properties": {
+        "hostrunExplorer.command": {
+          "type": "string",
+          "scope": "machine",
+          "default": "",
+          "description": "Executable to launch on the client machine. Empty uses the platform default (explorer.exe on Windows, cachyos-hello on Linux, open on macOS)."
+        },
+        "hostrunExplorer.args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "scope": "machine",
+          "default": [],
+          "description": "Arguments passed to the executable. The token ${path} is replaced with hostExplorer.path. Leave empty to use the platform default."
+        },
+        "hostrunExplorer.path": {
+          "type": "string",
+          "scope": "machine",
+          "default": "",
+          "description": "Host-side path substituted into ${path}. Windows example: \\\\wsl.localhost\\Ubuntu\\home\\petr\\proj. Linux example: /home/petr/proj."
+        },
+        "hostrunExplorer.label": {
+          "type": "string",
+          "scope": "machine",
+          "default": "$(folder-opened) Host",
+          "description": "Status bar button text. Supports $(icon-name) codicons."
+        }
+      }
+    }
+  }
+}

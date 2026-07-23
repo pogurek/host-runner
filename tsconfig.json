@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ES2024",
+    "lib": ["ES2024"],
+    "outDir": "./dist",
+    "rootDir": "./",
+    "moduleResolution": "nodenext",
+    "types": ["node", "vscode"],
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "ignoreDeprecations": "5.0"
+  },
+  "include": ["extension.ts"]
+}
